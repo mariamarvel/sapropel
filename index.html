@@ -1,0 +1,131 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm-4">
+            <form action="" method="">
+                <legend>Заголовок формы</legend>
+
+                <div class="form-group">
+                    <label for="">Введите ваше ФИО</label>
+                    <input type="text" class="form-control" id="" placeholder="Иванов Иван Иванович">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Введите ваш телефон</label>
+                    <input type="text" class="form-control" id="" placeholder="89111356982">
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить форму</button>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Подключение сброса стилей -->
+    <!-- <link rel="stylesheet" href="reset.css" /> -->
+
+    <!-- Подключение файла стилей -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" />
+    <title>Форма обратной связи</title>
+</head>
+
+<body>
+
+    <!-- Контейнер выравнивает по ширине и по центру -->
+    <div class="container">
+
+        <!-- content содержит содержимое формы -->
+        <div class="content">
+
+            <!-- Левая колонка: адрес, телефоны, email. Можете добавить свое -->
+            <div class="left-side">
+                <div class="address details">
+
+                    <!-- Вместо классов: название шрифтовых иконок (fontawesome.com) -->
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    <!-- topic - заголовок, text-one, text-two - текст -->
+                    <div class="topic">Адрес</div>
+                    <div class="text-one">г. Москва</div>
+                    <div class="text-two">Пресненская наб., 8 стр. 1</div>
+                </div>
+                <div class="phone details">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="topic">Телефон</div>
+                    <div class="text-one">8-800-000-00-00</div>
+                    <div class="text-two">8-900-000-00-00</div>
+                </div>
+                <div class="email details">
+                    <i class="fas fa-envelope"></i>
+                    <div class="topic">Email</div>
+                    <div class="text-one">support@site.com</div>
+                    <div class="text-two">admin@site.com</div>
+                </div>
+            </div>
+
+            <!-- Правая колонка: сама форма -->
+            <div class="right-side">
+
+                <!-- Заголовок для формы -->
+                <div class="topic-text">Отправьте нам сообщение</div>
+
+                <!-- Какой-то дополнительный текст -->
+                <p>
+                    Если у вас есть какие-то вопросы или предложения по сотрудничеству -
+                    заполните форму ниже
+                </p>
+
+                <!-- Форма обратной связи -->
+                <!-- action="#" указывает какой скрипт будет обрабатывать форму -->
+                <form action="send_mail.php" id="form" name="form" method ="POST">
+
+                    <!-- Каждый input для выравнивания вкладываем в блок input-box -->
+                    <div class="input-box">
+                        <!--data-reg="" проверка символов на русские буквы, для ркгулярных выражений  -->
+                        <input type="text" placeholder="Ваше имя" id="name" name="name" data-reg="^[А-ЯЁ][а-яё]*$" />
+                        <label for="name">Только русские буквы</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" placeholder="Введите email" id="email" name="email" data-reg="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"/>
+                        <label for="email">В формате: admin@gmail.com</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" placeholder="Введите телефон" id="phone" name="phone" data-reg="^((\+7|7|8)+([0-9]){10})$">
+                        <label for="phone">В формате: +79000000000, 89000000000</label>
+                    </div>
+                    <div class="input-box message-box">
+                        <textarea placeholder="Сообщение" required name="message" ></textarea>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Отправить" id="button" name="button"/> <!--type="submit" отправляет данные-->
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+<script src="app.js"></script>
+    <!-- Подключение шрифтовых иконок, можно получить на fontawesome.com -->
+    <script src="https://kit.fontawesome.com/fce9a50d02.js" crossorigin="anonymous"></script>
+</body>
+
+</html
