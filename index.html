@@ -1,36 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="col-sm-4">
-            <form action="" method="">
-                <legend>Заголовок формы</legend>
-
-                <div class="form-group">
-                    <label for="">Введите ваше ФИО</label>
-                    <input type="text" class="form-control" id="" placeholder="Иванов Иван Иванович">
-                </div>
-
-                <div class="form-group">
-                    <label for="">Введите ваш телефон</label>
-                    <input type="text" class="form-control" id="" placeholder="89111356982">
-                </div>
-                <button type="submit" class="btn btn-primary">Отправить форму</button>
-
-            </form>
-        </div>
-    </div>
-</body>
-
-</html> -->
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -47,6 +15,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mobile.css" />
     <title>Форма обратной связи</title>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -97,8 +66,7 @@
 
                 <!-- Форма обратной связи -->
                 <!-- action="#" указывает какой скрипт будет обрабатывать форму -->
-                <!-- <form action="send_mail.php" id="form" name="form" method ="POST"> -->
-                <form action="send.php" onsubmit="formCheck(event)" id="form" name="form" method ="POST">
+                <form id="form" name="form" method ="POST">
 
                     <!-- Каждый input для выравнивания вкладываем в блок input-box -->
                     <div class="input-box">
