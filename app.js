@@ -61,16 +61,24 @@ function formCheck(event) {
         alert("Заполните поля правильно");
         return;
     }
-    
+
     sendMail(event);
+}
+
+function formReset() {
+    form.reset();
+    validFormArr.forEach((el) => {
+        el.setAttribute("is-valid", 0);
+        el.style.border = "none";
+    });
 }
 
 function sendMail(event) {
     event.preventDefault();
-    let name =  inputArr[0].value;
-    let email =  inputArr[1].value;
-    let phone =  inputArr[2].value;
-    let msg =  inputArr[3].value;
+    let name = inputArr[0].value;
+    let email = inputArr[1].value;
+    let phone = inputArr[2].value;
+    let msg = inputArr[3].value;
     let ebody = `
     <b>Имя: </b>${name}
     <br>
@@ -82,14 +90,21 @@ function sendMail(event) {
     `;
     console.log(inputArr[3].value);
     Email.send({
-        SecureToken : "e3050873-0b75-43da-8af1-ab2e7be24f31", //add your token here
-        To : 'maaborodulina@gmail.com', 
-        From : email,
-        Subject : "Запрос из формы обратной связи",
-        Body : ebody
-    }).then(
-      message => alert(message)
-    );
+        SecureToken: "e3050873-0b75-43da-8af1-ab2e7be24f31", //add your token here
+        To: 'maaborodulina@gmail.com',
+        From: email,
+        Subject: "Запрос из формы обратной связи",
+        Body: ebody
+    }).then(message => {
+        if (message == "OK") {
+            alert("Ваше сообщение успешно отправлено!");
+            formReset(); //сброс формы
+        } else {
+            alert("Ошибка: " + message);
+        }
+
+
+    });
 }
 
 
