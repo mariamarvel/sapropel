@@ -61,38 +61,69 @@ function formCheck(event) {
         alert("Заполните поля правильно");
         return;
     }
-    formSubmit();
+    // formSubmit();
+    submitForm(event);
 }
 
-async function formSubmit() {
-    console.log("Проверка пройдена, данные отправляются...");
-    const data = serializeForm(form);
-    const response = await sendData(data)//содержит ответ, при отправке сообщения, в функцию sendData(data)  посылаем наши данные
+// async function formSubmit() {
+//     console.log("Проверка пройдена, данные отправляются...");
+//     const data = serializeForm(form);
+//     const response = await sendData(data)//содержит ответ, при отправке сообщения, в функцию sendData(data)  посылаем наши данные
 
-    //условия для получения ответа об отправке письма
-    if (response.ok) {
-        let result = await response.json();
-        alert(result.message);
-        formReset(); //сброс формы
-    } else {
-        alert("Код ошибки: " + response.status);
+//     //условия для получения ответа об отправке письма
+//     if (response.ok) {
+//         let result = await response.json();
+//         alert(result.message);
+//         formReset(); //сброс формы
+//     } else {
+//         alert("Код ошибки: " + response.status);
+//     }
+// }
+// function serializeForm(formNode) {
+//     return new FormData(formNode); //преобразование данных переданых по почте, в правильный вид
+// }
+// async function sendData(data) {
+//     return await fetch("send_mail.php", {
+//         method: "POST",
+//         body: data,
+//     }); //fetch() позволяет отправлять форму без перезагрузки, она отправляет запросы асинхронно. "send_mail.php"  куда отправляем данные{некоторые настройки}
+// }
+
+// //сброс всех полей формы, вместе с подсветкой полей
+// function formReset() {
+//     form.reset();
+//     validFormArr.forEach((el) => {
+//         el.setAttribute("is-valid", 0);
+//         el.style.border = "none";
+//     });
+// }
+
+async function submitForm(event) {
+    event.preventDefault(); // отключаем перезагрузку/перенаправление страницы
+    try {
+        // Формируем запрос
+      const response = await fetch(event.target.action, {
+          method: 'POST',
+          body: new FormData(event.target)
+      });
+      // проверяем, что ответ есть
+      if (!response.ok) throw (`Ошибка при обращении к серверу: ${response.status}`);
+      // проверяем, что ответ действительно JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw ('Ошибка обработки. Ответ не JSON');
+      }
+      // обрабатываем запрос
+      const json = await response.json();
+      if (json.result === "success") {
+          // в случае успеха
+          alert(json.info);
+      } else { 
+          // в случае ошибки
+          console.log(json);
+          throw (json.info);
+      }
+    } catch (error) { // обработка ошибки
+      alert(error);
     }
-}
-function serializeForm(formNode) {
-    return new FormData(formNode); //преобразование данных переданых по почте, в правильный вид
-}
-async function sendData(data) {
-    return await fetch("send_mail.php", {
-        method: "POST",
-        body: data,
-    }); //fetch() позволяет отправлять форму без перезагрузки, она отправляет запросы асинхронно. "send_mail.php"  куда отправляем данные{некоторые настройки}
-}
-
-//сброс всех полей формы, вместе с подсветкой полей
-function formReset() {
-    form.reset();
-    validFormArr.forEach((el) => {
-        el.setAttribute("is-valid", 0);
-        el.style.border = "none";
-    });
 }
